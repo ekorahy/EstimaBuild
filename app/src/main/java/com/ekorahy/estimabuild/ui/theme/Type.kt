@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.ekorahy.estimabuild.R
+import com.ekorahy.estimabuild.ui.theme.Slate950
 
 // Set of Material typography styles to start with
 val Typography: Typography
@@ -16,21 +17,24 @@ val Typography: Typography
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
             lineHeight = 28.sp,
-            letterSpacing = 0.sp
+            letterSpacing = 0.sp,
+            color = Slate950
         ),
         bodyLarge = TextStyle(
             fontFamily = poppinsFont,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
             lineHeight = 24.sp,
-            letterSpacing = 0.5.sp
+            letterSpacing = 0.5.sp,
+            color = Slate950
         ),
         bodyMedium = TextStyle(
             fontFamily = poppinsFont,
             fontWeight = FontWeight.Medium,
             fontSize = 11.sp,
             lineHeight = 16.sp,
-            letterSpacing = 0.5.sp
+            letterSpacing = 0.5.sp,
+            color = Slate950
         )
     )
 
