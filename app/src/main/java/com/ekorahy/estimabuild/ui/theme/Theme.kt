@@ -25,13 +25,15 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = Slate700,
+    onPrimary = Slate100,
+    primaryContainer = Slate200,
+    onPrimaryContainer = Slate950,
     secondary = Slate400,
-    tertiary = Slate100,
     secondaryContainer = Slate400,
     onSecondaryContainer = Slate950,
     onSurface = Slate400,
     onSurfaceVariant = Slate200,
-    background = White
+    background = Color.White
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

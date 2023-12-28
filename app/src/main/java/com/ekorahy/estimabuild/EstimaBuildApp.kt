@@ -7,13 +7,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.ekorahy.estimabuild.ui.components.BottomBar
 import com.ekorahy.estimabuild.ui.navigation.Screen
+import com.ekorahy.estimabuild.ui.screen.detail.DetailProduct
 import com.ekorahy.estimabuild.ui.screen.home.Home
 import com.ekorahy.estimabuild.ui.theme.EstimaBuildTheme
 
@@ -49,8 +53,25 @@ fun EstimaBuildApp(
             composable(Screen.Profile.route) {
 
             }
-            composable(Screen.DetailProduct.route) {
-
+            composable(
+                route = Screen.DetailProduct.route,
+                arguments = listOf(navArgument("productId") { type = NavType.StringType})
+            ) {
+                val id = it.arguments?.getString("productId") ?: ""
+                DetailProduct(
+                    productId = id,
+                    navigateBack = { navController.navigateUp() },
+                    navigateToEstimate = {
+                        navController.popBackStack()
+                        navController.navigate(Screen.Estimation.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                )
             }
         }
     }

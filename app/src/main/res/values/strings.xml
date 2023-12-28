@@ -4,7 +4,9 @@
     <string name="menu_estimation">Estimation</string>
     <string name="menu_profile">Profile</string>
     <string name="back">Back</string>
-    <string name="desc">Description</string>
+    <string name="desc">Description :</string>
     <string name="add_to_estimation">Add to Estimation</string>
     <string name="dollar">$ </string>
+    <string name="button_add">Button Add to Estimation</string>
+    <string name="icon_estimate">Estimation icon</string>
 </resources>

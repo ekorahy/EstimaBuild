@@ -13,7 +13,7 @@ class ProductRepository {
     init {
         if (estimateProducts.isEmpty()) {
             FakeProductDataSource.dummyProducts.forEach {
-                estimateProducts.add(AddProduct(it, 0))
+                estimateProducts.add(AddProduct(it, 1))
             }
         }
     }
