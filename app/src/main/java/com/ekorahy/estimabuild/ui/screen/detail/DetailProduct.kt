@@ -25,15 +25,16 @@ fun DetailProduct(
             is UiState.Success -> {
                 val data = uiState.data
                 DetailContent(
-                    image = data.product.image,
-                    title = data.product.title,
-                    category = data.product.category,
-                    price = data.product.price,
-                    desc = data.product.desc,
-                    count = data.count,
+                    data.product.image,
+                    data.product.id,
+                    data.product.title,
+                    data.product.category,
+                    data.product.price,
+                    data.product.desc,
+                    data.count,
                     onBackClick = navigateBack,
-                    onAddToEstimate = { count ->
-                        viewModel.addProductToEstimation(data.product, count.toInt())
+                    onAddToEstimate = { addCount ->
+                        viewModel.addProductToEstimation(data.product, addCount)
                         navigateToEstimate()
                     }
                 )

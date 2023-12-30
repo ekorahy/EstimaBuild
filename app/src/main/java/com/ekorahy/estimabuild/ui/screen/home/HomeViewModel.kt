@@ -8,7 +8,6 @@ import com.ekorahy.estimabuild.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: ProductRepository): ViewModel() {
@@ -17,7 +16,7 @@ class HomeViewModel(private val repository: ProductRepository): ViewModel() {
 
     fun getProducts() {
         viewModelScope.launch {
-            repository.getProducts()
+            repository.getAllProducts()
                 .catch {
                     _uiState.value = UiState.Error(it.message.toString())
                 }

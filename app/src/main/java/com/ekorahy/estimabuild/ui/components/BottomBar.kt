@@ -58,7 +58,7 @@ fun BottomBar(
                         contentDescription = item.title
                     )
                 },
-                label = { Text(item.title)},
+                label = { Text(item.title) },
                 selected = currentRoute == item.screen.route,
                 onClick = {
                     navController.navigate(item.screen.route) {

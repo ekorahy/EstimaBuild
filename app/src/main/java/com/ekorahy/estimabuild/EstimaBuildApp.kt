@@ -1,11 +1,13 @@
 package com.ekorahy.estimabuild
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -18,7 +20,9 @@ import androidx.navigation.navArgument
 import com.ekorahy.estimabuild.ui.components.BottomBar
 import com.ekorahy.estimabuild.ui.navigation.Screen
 import com.ekorahy.estimabuild.ui.screen.detail.DetailProduct
+import com.ekorahy.estimabuild.ui.screen.estimation.Estimation
 import com.ekorahy.estimabuild.ui.screen.home.Home
+import com.ekorahy.estimabuild.ui.screen.profile.Profile
 import com.ekorahy.estimabuild.ui.theme.EstimaBuildTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,12 +54,33 @@ fun EstimaBuildApp(
                     }
                 )
             }
+            composable(Screen.Estimation.route) {
+                val context = LocalContext.current
+                Estimation(
+                    navigateBack = { navController.navigateUp() },
+                    onEstimateButtonClicked = { totalPrice ->
+                        Toast.makeText(
+                            context,
+                            String.format(
+                                "The total estimate for all products is $ %.2f",
+                                totalPrice
+                            ),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    },
+                    navigateToDetail = { productId ->
+                        navController.navigate(Screen.DetailProduct.createRoute(productId))
+                    }
+                )
+            }
             composable(Screen.Profile.route) {
-
+                Profile(
+                    navigateBack = { navController.navigateUp() },
+                )
             }
             composable(
                 route = Screen.DetailProduct.route,
-                arguments = listOf(navArgument("productId") { type = NavType.StringType})
+                arguments = listOf(navArgument("productId") { type = NavType.StringType })
             ) {
                 val id = it.arguments?.getString("productId") ?: ""
                 DetailProduct(

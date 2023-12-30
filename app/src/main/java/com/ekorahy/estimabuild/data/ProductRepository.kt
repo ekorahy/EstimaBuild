@@ -8,32 +8,32 @@ import kotlinx.coroutines.flow.map
 
 class ProductRepository {
 
-    private val estimateProducts = mutableListOf<AddProduct>()
+    private val addProducts = mutableListOf<AddProduct>()
 
     init {
-        if (estimateProducts.isEmpty()) {
+        if (addProducts.isEmpty()) {
             FakeProductDataSource.dummyProducts.forEach {
-                estimateProducts.add(AddProduct(it, 1))
+                addProducts.add(AddProduct(it, 0))
             }
         }
     }
 
-    fun getProducts(): Flow<List<AddProduct>> {
-        return flowOf(estimateProducts)
+    fun getAllProducts(): Flow<List<AddProduct>> {
+        return flowOf(addProducts)
     }
 
     fun getProductById(productId: String): AddProduct {
-        return estimateProducts.first {
+        return addProducts.first {
             it.product.id == productId
         }
     }
 
     fun updateAddedProduct(productId: String, newCountValue: Int): Flow<Boolean> {
-        val index = estimateProducts.indexOfFirst { it.product.id == productId }
+        val index = addProducts.indexOfFirst { it.product.id == productId }
         val result = if (index >= 0) {
-            val addedProduct = estimateProducts[index]
-            estimateProducts[index] =
-                addedProduct.copy(product = addedProduct.product, count = newCountValue)
+            val addProduct = addProducts[index]
+            addProducts[index] =
+                addProduct.copy(product = addProduct.product, count = newCountValue)
             true
         } else {
             false
@@ -42,21 +42,22 @@ class ProductRepository {
     }
 
     fun getAddedProduct(): Flow<List<AddProduct>> {
-        return getProducts()
-            .map { addedProducts ->
-                addedProducts.filter { addedProduct ->
-                    addedProduct.count != 0
+        return getAllProducts()
+            .map { addProducts ->
+                addProducts.filter { addProduct ->
+                    addProduct.count != 0
                 }
             }
     }
 
-    companion object
-    @Volatile
-    private var instance: ProductRepository? = null
+    companion object {
+        @Volatile
+        private var instance: ProductRepository? = null
 
-    fun getInstance(): ProductRepository = instance ?: synchronized(this) {
-        ProductRepository().apply {
-            instance = this
+        fun getInstance(): ProductRepository = instance ?: synchronized(this) {
+            ProductRepository().apply {
+                instance = this
+            }
         }
     }
 }

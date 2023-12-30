@@ -10,8 +10,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class DetailProductViewModel(private val repository: ProductRepository): ViewModel() {
-    val _uiState: MutableStateFlow<UiState<AddProduct>> = MutableStateFlow(UiState.Loading)
+
+class DetailProductViewModel(private val repository: ProductRepository) : ViewModel() {
+    private val _uiState: MutableStateFlow<UiState<AddProduct>> = MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState<AddProduct>> get() = _uiState
 
     fun getProductById(productId: String) {

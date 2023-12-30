@@ -3,10 +3,10 @@ package com.ekorahy.estimabuild.ui.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,8 +19,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.MonetizationOn
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,27 +29,26 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ekorahy.estimabuild.R
 import com.ekorahy.estimabuild.ui.theme.EstimaBuildTheme
-import com.ekorahy.estimabuild.ui.theme.Slate100
+import com.ekorahy.estimabuild.ui.theme.Slate200
 import com.ekorahy.estimabuild.ui.theme.Slate400
 import com.ekorahy.estimabuild.ui.theme.Slate700
 
 @Composable
 fun DetailContent(
     @DrawableRes image: Int,
+    addId: String,
     title: String,
     category: String,
     price: Double,
@@ -72,17 +69,27 @@ fun DetailContent(
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
-            .padding(16.dp)
+            .padding(16.dp, 0.dp, 16.dp, 16.dp)
     ) {
-        Icon(
-            imageVector = Icons.Outlined.ArrowBack,
-            tint = Slate700,
-            contentDescription = stringResource(R.string.back),
-            modifier = modifier
-                .padding(0.dp, 8.dp)
-                .size(26.dp)
-                .clickable { onBackClick() }
-        )
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Icon(
+                imageVector = Icons.Outlined.ArrowBack,
+                tint = Slate700,
+                contentDescription = stringResource(R.string.back),
+                modifier = modifier
+                    .padding(0.dp, 16.dp, 16.dp, 16.dp)
+                    .size(26.dp)
+                    .clickable { onBackClick() }
+            )
+            Text(
+                text = stringResource(R.string.detail),
+                style = MaterialTheme.typography.titleSmall.copy(
+                    fontSize = 16.sp
+                )
+            )
+        }
         Image(
             painter = painterResource(image),
             contentDescription = title,
@@ -124,6 +131,7 @@ fun DetailContent(
         Spacer(modifier = modifier.size(10.dp))
         Text(
             text = stringResource(R.string.desc),
+            textAlign = TextAlign.Justify,
             style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold
             )
@@ -134,24 +142,29 @@ fun DetailContent(
             style = MaterialTheme.typography.bodyMedium
         )
         Spacer(modifier = modifier.size(12.dp))
-        Button(
-            onClick = { onAddToEstimate(addCount) },
+        Spacer(
             modifier = modifier
+                .height(1.dp)
                 .fillMaxWidth()
-                .height(52.dp)
-                .semantics(mergeDescendants = true) {
-                    contentDescription = "button add product to estimation"
-                }
-        ) {
-            Text(
-                text = stringResource(R.string.add_to_estimation),
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontSize = 16.sp,
-                    color = Slate100
-                ),
-                modifier = modifier.align(Alignment.CenterVertically)
-            )
-        }
+                .background(Slate200)
+        )
+        ProductCounter(
+            addId,
+            addCount,
+            onProductIncreased = { addCount++ },
+            onProductDecreased = { if (addCount > 0) addCount-- },
+            modifier = modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(bottom = 16.dp, top = 16.dp)
+        )
+        totalPrice = price * addCount
+        ButtonAdd(
+            text = stringResource(R.string.add_to_estimation, totalPrice),
+            enabled = addCount > 0,
+            onClick = {
+                onAddToEstimate(addCount)
+            }
+        )
     }
 }
 
@@ -160,16 +173,16 @@ fun DetailContent(
 fun DetailContentPreview() {
     EstimaBuildTheme {
         DetailContent(
+            addId = "product-1",
             image = R.drawable.mo1,
             title = "Monitor Samsung S24R350 24-inch FHD",
             category = "monitor",
             price = 68.07,
             desc = "Samsung S24R350 24-inch FHD Monitor with bezel-less design is a 24\" monitor with IPS display panel. This monitor is supported with 1920 x 1080pixels resolution with 16:9 aspect ratio and 75Hz refresh rate. With its various sophistication, the Samsung S24R350 24-inch FHD Monitor with bezel-less design is suitable for various purposes.\n" +
                     "2.  Monitor Xiaomi 30-inch Curved Gaming.",
-            count = 1,
+            count = 0,
             onBackClick = { },
             onAddToEstimate = { },
-            modifier = Modifier
         )
     }
 }
