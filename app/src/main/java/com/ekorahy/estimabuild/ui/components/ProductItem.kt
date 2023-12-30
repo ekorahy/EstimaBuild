@@ -35,7 +35,7 @@ fun ProductItem(
     price: Double,
     modifier: Modifier = Modifier
 ) {
-    Column (
+    Column(
         modifier = modifier
             .border(BorderStroke(1.dp, Slate100), RoundedCornerShape(4.dp))
             .padding(16.dp)

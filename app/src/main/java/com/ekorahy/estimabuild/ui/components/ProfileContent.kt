@@ -34,17 +34,17 @@ import com.ekorahy.estimabuild.ui.theme.Slate700
 
 @Composable
 fun ProfileContent(
-    modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Column (
+    Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp, 0.dp, 16.dp, 16.dp)
     ) {
-        Row (
+        Row(
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Icon(
                 imageVector = Icons.Outlined.ArrowBack,
                 tint = Slate700,
@@ -61,10 +61,10 @@ fun ProfileContent(
                 )
             )
         }
-        Row (
+        Row(
             modifier = modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Column(
                 modifier = modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally

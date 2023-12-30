@@ -22,6 +22,7 @@ fun DetailProduct(
             is UiState.Loading -> {
                 viewModel.getProductById(productId)
             }
+
             is UiState.Success -> {
                 val data = uiState.data
                 DetailContent(
@@ -39,6 +40,7 @@ fun DetailProduct(
                     }
                 )
             }
+
             is UiState.Error -> {}
         }
     }

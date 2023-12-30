@@ -2,7 +2,6 @@ package com.ekorahy.estimabuild
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,7 +24,6 @@ import com.ekorahy.estimabuild.ui.screen.home.Home
 import com.ekorahy.estimabuild.ui.screen.profile.Profile
 import com.ekorahy.estimabuild.ui.theme.EstimaBuildTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EstimaBuildApp(
     modifier: Modifier = Modifier,
@@ -67,6 +65,9 @@ fun EstimaBuildApp(
                             ),
                             Toast.LENGTH_LONG
                         ).show()
+                    },
+                    navigateToHome = {
+                        navController.navigate(Screen.Home.route)
                     },
                     navigateToDetail = { productId ->
                         navController.navigate(Screen.DetailProduct.createRoute(productId))

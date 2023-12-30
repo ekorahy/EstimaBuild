@@ -24,7 +24,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableDoubleStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -59,11 +60,11 @@ fun DetailContent(
     modifier: Modifier = Modifier
 ) {
     var totalPrice by rememberSaveable {
-        mutableStateOf(0.0)
+        mutableDoubleStateOf(0.0)
     }
 
     var addCount by rememberSaveable {
-        mutableStateOf(count)
+        mutableIntStateOf(count)
     }
 
     Column(
@@ -71,9 +72,9 @@ fun DetailContent(
             .verticalScroll(rememberScrollState())
             .padding(16.dp, 0.dp, 16.dp, 16.dp)
     ) {
-        Row (
+        Row(
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Icon(
                 imageVector = Icons.Outlined.ArrowBack,
                 tint = Slate700,

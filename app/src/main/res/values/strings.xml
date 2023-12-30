@@ -11,11 +11,18 @@
     <string name="icon_estimate">Estimation icon</string>
     <string name="multiplication_price">%d x $ %.2f</string>
     <string name="price">$ %.2f</string>
-    <string name="detail">Detail Product</string>
+    <string name="detail">Product Detail</string>
     <string name="estimation">Estimation</string>
     <string name="estimate_now">Estimate Now</string>
     <string name="profile">Profile</string>
     <string name="profile_img">Profile Image</string>
     <string name="profile_name">Eko Rahayu Widodo</string>
     <string name="profile_email">ekowidodo073@gmail.com</string>
+    <string name="empty_data">Empty Data!</string>
+    <string name="not_found">Product Not Found!</string>
+    <string name="add_data">Add new data.</string>
+    <string name="empty_data_img">Empty data image</string>
+    <string name="not_found_img">Not found image</string>
+    <string name="search_product">Search Product</string>
+    <string name="search_icon">Search Icon</string>
 </resources>

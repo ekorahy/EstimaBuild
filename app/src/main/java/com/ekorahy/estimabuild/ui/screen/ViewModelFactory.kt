@@ -7,7 +7,8 @@ import com.ekorahy.estimabuild.ui.screen.detail.DetailProductViewModel
 import com.ekorahy.estimabuild.ui.screen.estimation.EstimationViewModel
 import com.ekorahy.estimabuild.ui.screen.home.HomeViewModel
 
-class ViewModelFactory(private val repository: ProductRepository): ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val repository: ProductRepository) :
+    ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

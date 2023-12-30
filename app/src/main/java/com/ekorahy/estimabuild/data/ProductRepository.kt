@@ -18,8 +18,14 @@ class ProductRepository {
         }
     }
 
-    fun getAllProducts(): Flow<List<AddProduct>> {
+    private fun getAllProducts(): Flow<List<AddProduct>> {
         return flowOf(addProducts)
+    }
+
+    fun searchProducts(query: String): List<AddProduct> {
+        return addProducts.filter {
+            it.product.title.contains(query, ignoreCase = true)
+        }
     }
 
     fun getProductById(productId: String): AddProduct {

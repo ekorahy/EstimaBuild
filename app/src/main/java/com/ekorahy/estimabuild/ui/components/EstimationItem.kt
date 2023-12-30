@@ -59,7 +59,7 @@ fun EstimationItem(
                 .clip(Shapes.small)
         )
         Spacer(modifier = modifier.size(6.dp))
-        Column{
+        Column {
             Text(
                 text = title,
                 maxLines = 1,
@@ -77,7 +77,7 @@ fun EstimationItem(
                     .border(BorderStroke(0.4.dp, Slate400), RoundedCornerShape(4.dp))
                     .padding(4.dp, 2.dp)
             )
-            Row (
+            Row(
                 modifier = modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,

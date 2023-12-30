@@ -7,9 +7,15 @@ import com.ekorahy.estimabuild.model.AddProduct
 @Composable
 fun HomeContent(
     products: List<AddProduct>,
-    modifier: Modifier = Modifier,
-    navigateToDetail: (String) -> Unit
+    query: String,
+    onQueryChange: (String) -> Unit,
+    navigateToDetail: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
+    SearchBar(
+        query = query,
+        onQueryChange = onQueryChange
+    )
     ProductList(
         products = products,
         modifier = modifier,

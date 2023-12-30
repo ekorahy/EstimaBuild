@@ -31,6 +31,7 @@ fun EstimationContent(
     onBackClick: () -> Unit,
     onProductCountChanged: (id: String, count: Int) -> Unit,
     onEstimateButtonClicked: (Double) -> Unit,
+    navigateToHome: () -> Unit,
     navigateToDetail: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -58,27 +59,34 @@ fun EstimationContent(
                 )
             )
         }
-        LazyColumn(
-            contentPadding = PaddingValues(0.dp, 16.dp, 0.dp, 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.weight(weight = 1f)
-        ) {
-            items(state.addProduct, key = { it.product.id }) { item ->
-                EstimationItem(
-                    productId = item.product.id,
-                    image = item.product.image,
-                    title = item.product.title,
-                    category = item.product.category,
-                    price = item.product.price,
-                    totalPrice = item.product.price * item.count,
-                    count = item.count,
-                    onProductCountChanged = onProductCountChanged,
-                    modifier = modifier.clickable {
-                        navigateToDetail(item.product.id)
-                    }
-                )
+        if (state.addProduct.isEmpty()) {
+            EmptyData(
+                onClick = navigateToHome
+            )
+        } else {
+            LazyColumn(
+                contentPadding = PaddingValues(0.dp, 16.dp, 0.dp, 16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.weight(weight = 1f)
+            ) {
+                items(state.addProduct, key = { it.product.id }) { item ->
+                    EstimationItem(
+                        productId = item.product.id,
+                        image = item.product.image,
+                        title = item.product.title,
+                        category = item.product.category,
+                        price = item.product.price,
+                        totalPrice = item.product.price * item.count,
+                        count = item.count,
+                        onProductCountChanged = onProductCountChanged,
+                        modifier = modifier.clickable {
+                            navigateToDetail(item.product.id)
+                        }
+                    )
+                }
             }
         }
+
         ButtonAdd(
             text = stringResource(R.string.estimate_now),
             enabled = state.addProduct.isNotEmpty(),
