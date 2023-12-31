@@ -19,10 +19,10 @@
     <string name="profile_name">Eko Rahayu Widodo</string>
     <string name="profile_email">ekowidodo073@gmail.com</string>
     <string name="empty_data">Empty Data!</string>
-    <string name="not_found">Product Not Found!</string>
+    <string name="not_found">Products Not Found!</string>
     <string name="add_data">Add new data.</string>
     <string name="empty_data_img">Empty data image</string>
     <string name="not_found_img">Not found image</string>
-    <string name="search_product">Search Product</string>
+    <string name="search_product">Search Products</string>
     <string name="search_icon">Search Icon</string>
 </resources>
