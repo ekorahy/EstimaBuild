@@ -16,10 +16,10 @@ import com.ekorahy.estimabuild.ui.theme.Slate100
 
 @Composable
 fun ButtonAdd(
+    modifier: Modifier = Modifier,
     text: String,
     enabled: Boolean = true,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,

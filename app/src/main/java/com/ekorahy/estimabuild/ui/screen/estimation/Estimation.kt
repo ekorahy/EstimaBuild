@@ -2,6 +2,7 @@ package com.ekorahy.estimabuild.ui.screen.estimation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ekorahy.estimabuild.di.Injection
 import com.ekorahy.estimabuild.ui.common.UiState
@@ -10,6 +11,7 @@ import com.ekorahy.estimabuild.ui.screen.ViewModelFactory
 
 @Composable
 fun Estimation(
+    modifier: Modifier = Modifier,
     navigateBack: () -> Unit,
     viewModel: EstimationViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository())

@@ -13,11 +13,11 @@ import com.ekorahy.estimabuild.ui.screen.ViewModelFactory
 
 @Composable
 fun Home(
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository())
     ),
-    navigateToDetail: (String) -> Unit,
-    modifier: Modifier = Modifier
+    navigateToDetail: (String) -> Unit
 ) {
     val query by rememberSaveable {
         viewModel.query

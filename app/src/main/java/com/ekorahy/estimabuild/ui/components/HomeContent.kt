@@ -14,7 +14,7 @@ fun HomeContent(
 ) {
     SearchBar(
         query = query,
-        onQueryChange = onQueryChange
+        onQueryChange = onQueryChange,
     )
     ProductList(
         products = products,

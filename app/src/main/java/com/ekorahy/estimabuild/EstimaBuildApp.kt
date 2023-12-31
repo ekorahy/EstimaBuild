@@ -27,7 +27,7 @@ import com.ekorahy.estimabuild.ui.theme.EstimaBuildTheme
 @Composable
 fun EstimaBuildApp(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
+    navController: NavHostController = rememberNavController()
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route

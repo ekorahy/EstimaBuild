@@ -31,7 +31,7 @@ fun ProductList(
             .padding(top = 80.dp)
             .testTag("ProductList")
     ) {
-        items(products) { data ->
+        items(products, key = { it.product.id }) { data ->
             ProductItem(
                 image = data.product.image,
                 title = data.product.title,
