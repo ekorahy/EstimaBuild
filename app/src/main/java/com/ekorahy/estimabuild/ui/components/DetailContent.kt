@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -83,6 +84,7 @@ fun DetailContent(
                     .padding(0.dp, 16.dp, 16.dp, 16.dp)
                     .size(26.dp)
                     .clickable { onBackClick() }
+                    .testTag(stringResource(R.string.back))
             )
             Text(
                 text = stringResource(R.string.detail),
@@ -157,6 +159,7 @@ fun DetailContent(
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(bottom = 16.dp, top = 16.dp)
+                .testTag(stringResource(R.string.product_counter))
         )
         totalPrice = price * addCount
         ButtonAdd(
@@ -164,7 +167,8 @@ fun DetailContent(
             enabled = addCount > 0,
             onClick = {
                 onAddToEstimate(addCount)
-            }
+            },
+            modifier = modifier.testTag(stringResource(R.string.button_add))
         )
     }
 }

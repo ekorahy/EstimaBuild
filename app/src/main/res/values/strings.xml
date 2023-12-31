@@ -25,4 +25,21 @@
     <string name="not_found_img">Not found image</string>
     <string name="search_product">Search Products</string>
     <string name="search_icon">Search Icon</string>
+    <string name="title_case">case</string>
+    <string name="title_monitor1">Samsung Monitor S24R35024 - inch FHD</string>
+    <string name="title_monitor2">Xiaomi Monitor 30-inch Curved Gaming</string>
+    <string name="title_monitor3">SPC Monitor SM-19HD 19-inch LED</string>
+    <string name="title_motherboard1">ASUS PRIME Motherboard H510M-K</string>
+    <string name="title_case1">MSI Shield M300 PC Case</string>
+    <string name="title_case2">Thermaltake Versa H18 PC Case</string>
+    <string name="title_case3">Digital Alliance PC N23 RGB Aura Sync - PC Case</string>
+    <string name="not_found_search">cases</string>
+    <string name="empty_search"></string>
+    <string name="product_list">ProductList</string>
+    <string name="product_counter">ProductCounter</string>
+    <string name="default_count">0</string>
+    <string name="button_increase">Increased</string>
+    <string name="button_decrease">Decreased</string>
+    <string name="count_increase">1</string>
+    <string name="count_decrease">0</string>
 </resources>

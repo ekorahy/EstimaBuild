@@ -10,7 +10,9 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.ekorahy.estimabuild.R
 import com.ekorahy.estimabuild.model.AddProduct
 
 @Composable
@@ -29,7 +31,7 @@ fun ProductList(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
             .padding(top = 80.dp)
-            .testTag("ProductList")
+            .testTag(stringResource(R.string.product_list))
     ) {
         items(products, key = { it.product.id }) { data ->
             ProductItem(
