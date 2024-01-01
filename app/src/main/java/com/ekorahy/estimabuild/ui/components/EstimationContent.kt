@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,6 +52,7 @@ fun EstimationContent(
                     .padding(0.dp, 0.dp, 16.dp, 0.dp)
                     .size(26.dp)
                     .clickable { onBackClick() }
+                    .testTag(stringResource(R.string.back))
             )
             Text(
                 text = stringResource(R.string.estimation),
@@ -67,7 +69,9 @@ fun EstimationContent(
             LazyColumn(
                 contentPadding = PaddingValues(0.dp, 16.dp, 0.dp, 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.weight(weight = 1f)
+                modifier = Modifier
+                    .weight(weight = 1f)
+                    .testTag(stringResource(R.string.product_list))
             ) {
                 items(state.addProduct, key = { it.product.id }) { item ->
                     EstimationItem(
@@ -93,6 +97,7 @@ fun EstimationContent(
             onClick = {
                 onEstimateButtonClicked(state.totalPrice)
             },
+            modifier = modifier.testTag(stringResource(R.string.estimate_now))
         )
     }
 }

@@ -52,7 +52,6 @@ class EstimaBuildAppTest {
     *    the data you are looking for was not found.
     *  */
 
-    // HOME SCREEN
     // POSITIVE
     @Test
     fun navHost_verifyStartDestination() {
@@ -131,7 +130,7 @@ class EstimaBuildAppTest {
         composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[1].title).performClick()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_counter))
             .performScrollTo()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.default_count))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_0))
             .assertExists()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
             .assertIsNotEnabled()
@@ -140,14 +139,16 @@ class EstimaBuildAppTest {
     @Test
     fun when_buttonIncreaseIsPressedCountIncreased() {
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_list))
-            .performScrollToIndex(1)
-        composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[1].title).performClick()
+            .performScrollToIndex(3)
+        composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[3].title).performClick()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_counter))
             .performScrollTo()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
             .performClick()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_increase))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_1))
             .assertExists()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
     }
 
     @Test
@@ -159,11 +160,11 @@ class EstimaBuildAppTest {
             .performScrollTo()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
             .performClick()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_increase))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_1))
             .assertExists()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
             .performClick()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_decrease))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_0))
             .assertExists()
     }
 
@@ -174,14 +175,16 @@ class EstimaBuildAppTest {
         composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[1].title).performClick()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_counter))
             .performScrollTo()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.default_count))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_0))
             .assertExists()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
             .performClick()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_increase))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_1))
             .assertExists()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
             .assertIsEnabled()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
     }
 
     @Test
@@ -193,13 +196,15 @@ class EstimaBuildAppTest {
             .performScrollTo()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
             .performClick()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_increase))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_1))
             .assertExists()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
             .performScrollTo()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
             .performClick()
         navController.assertCurrentRouteName(Screen.Estimation.route)
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
     }
 
     @Test
@@ -216,15 +221,179 @@ class EstimaBuildAppTest {
     @Test
     fun when_theCountValueIsZeroAndTheDecreaseButtonIsPressed_theCountRemainsZero() {
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_list))
-            .performScrollToIndex(1)
-        composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[1].title).performClick()
+            .performScrollToIndex(2)
+        composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[2].title).performClick()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_counter))
             .performScrollTo()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.default_count))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_0))
             .assertExists()
         composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
             .performClick()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.default_count))
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_0))
             .assertExists()
     }
+
+    /*
+    * TESTING SCENARIO
+    * ESTIMATION SCREEN
+    * POSITIVE :
+    * 1. When there is a product item on the estimation page, and the increased product
+    *    button is pressed, the count value is +1.
+    * 2. When there is a product item on the estimation page and the decreased product
+    *    button is pressed, the count value is -1.
+    * 3. When there is a product item on the estimation page and the estimate now
+    *    button is pressed, a toast will appear displaying the total estimate for all products.
+    * 4. When the back arrow button is pressed, it will go to the home page.
+    * NEGATIVE :
+    * 1. When there are no product items (empty data) on the estimation page,
+    *    it will display information indicating empty data.
+    * 2. When there is no product item (empty data) there is a text button add new data and
+    *    when pressed it will move to the home page
+    *  */
+
+    // POSITIVE
+    @Test
+    fun when_thereIsProductItemAndTheIncreasedProductButtonIsPressed_TheCountIncreased() {
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_list))
+            .performScrollToIndex(0)
+        composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[0].title).performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_counter))
+            .performScrollTo()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
+            .performClick()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_1))
+            .assertExists()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
+            .performScrollTo()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
+            .performClick()
+        navController.assertCurrentRouteName(Screen.Estimation.route)
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.title_monitor1))
+            .assertExists()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_1))
+            .assertExists()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
+            .performClick()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_2))
+            .assertExists()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
+    }
+
+    @Test
+    fun when_thereIsProductItemAndTheDecreasedProductButtonIsPressed_TheCountDecreased() {
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_list))
+            .performScrollToIndex(0)
+        composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[0].title).performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_counter))
+            .performScrollTo()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
+            .performScrollTo()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
+            .performClick()
+        navController.assertCurrentRouteName(Screen.Estimation.route)
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.title_monitor1))
+            .assertExists()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_2))
+            .assertExists()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count_1))
+            .assertExists()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
+    }
+
+    @Test
+    fun when_thereIsProductItemAndTheEstimateNowButtonIsPressed_displayTheTotalEstimate() {
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_list))
+            .performScrollToIndex(0)
+        composeTestRule.onNodeWithText(FakeProductDataSource.dummyProducts[0].title).performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.product_counter))
+            .performScrollTo()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_increase))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
+            .performScrollTo()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_add))
+            .performClick()
+        navController.assertCurrentRouteName(Screen.Estimation.route)
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.estimate_now))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.button_decrease))
+            .performClick()
+    }
+
+    @Test
+    fun when_theBackArrowButtonIsPressedOnEstimationPage_itWillGoToTheHomePage() {
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.estimation))
+            .performClick()
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.back))
+            .performClick()
+        navController.assertCurrentRouteName(Screen.Home.route)
+    }
+
+    // NEGATIVE
+    @Test
+    fun when_thereAreNoProductItems_displayInformationIndicatingEmptyData() {
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.estimation))
+            .performClick()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.empty_data))
+            .assertExists()
+    }
+
+    @Test
+    fun when_thereIsNoProductItems_thereIsTextButtonAddData_andMoveToTheHomePage() {
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.estimation))
+            .performClick()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.add_data))
+            .assertExists()
+            .performClick()
+        navController.assertCurrentRouteName(Screen.Home.route)
+    }
+
+    /*
+    * TESTING SCENARIO
+    * PROFILE SCREEN
+    * 1. Ensure the page displays the developer's image, name and email.
+    * 2. When the back arrow button is pressed, it will go to the home page.
+    *  */
+
+    @Test
+    fun ensure_thePageDisplaysTheDeveloperInformation() {
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.profile))
+            .performClick()
+        navController.assertCurrentRouteName(Screen.Profile.route)
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.profile_img))
+            .assertExists()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.profile_name))
+            .assertExists()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.profile_email))
+            .assertExists()
+    }
+
+    @Test
+    fun when_theBackArrowButtonInProfilePageIsPressed_itWillGoToTheHomePage() {
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.profile))
+            .performClick()
+        navController.assertCurrentRouteName(Screen.Profile.route)
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.back))
+            .performClick()
+        navController.assertCurrentRouteName(Screen.Home.route)
+    }
+
 }

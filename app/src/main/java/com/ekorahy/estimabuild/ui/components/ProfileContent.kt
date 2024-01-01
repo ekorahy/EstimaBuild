@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -53,6 +54,7 @@ fun ProfileContent(
                     .padding(0.dp, 16.dp, 16.dp, 16.dp)
                     .size(26.dp)
                     .clickable { onBackClick() }
+                    .testTag(stringResource(R.string.back))
             )
             Text(
                 text = stringResource(R.string.profile),
@@ -78,6 +80,7 @@ fun ProfileContent(
                         .border(6.dp, Slate100, CircleShape)
                         .padding(10.dp)
                         .clip(CircleShape)
+                        .testTag(stringResource(R.string.profile_img))
                 )
                 Spacer(modifier = modifier.size(6.dp))
                 Text(

@@ -45,7 +45,7 @@ fun ProductCounter(
             modifier = Modifier.size(30.dp)
         ) {
             Text(
-                text = "—",
+                text = stringResource(R.string.text_decrease),
                 fontSize = 22.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
@@ -59,7 +59,7 @@ fun ProductCounter(
         Text(
             text = addCount.toString(),
             modifier = Modifier
-                .testTag("count")
+                .testTag(stringResource(R.string.count))
                 .weight(1f),
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
@@ -73,7 +73,7 @@ fun ProductCounter(
             modifier = Modifier.size(30.dp)
         ) {
             Text(
-                text = "＋",
+                text = stringResource(R.string.text_increase),
                 fontSize = 22.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier

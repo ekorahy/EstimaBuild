@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -83,7 +85,7 @@ fun EstimaBuildApp(
                 route = Screen.DetailProduct.route,
                 arguments = listOf(navArgument("productId") { type = NavType.StringType })
             ) {
-                val id = it.arguments?.getString("productId") ?: ""
+                val id = it.arguments?.getString(stringResource(R.string.key)) ?: stringResource(R.string.key_empty)
                 DetailProduct(
                     productId = id,
                     navigateBack = { navController.navigateUp() },

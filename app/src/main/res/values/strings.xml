@@ -37,9 +37,16 @@
     <string name="empty_search"></string>
     <string name="product_list">ProductList</string>
     <string name="product_counter">ProductCounter</string>
-    <string name="default_count">0</string>
     <string name="button_increase">Increased</string>
     <string name="button_decrease">Decreased</string>
-    <string name="count_increase">1</string>
-    <string name="count_decrease">0</string>
+    <string name="text_increase">+</string>
+    <string name="count">count</string>
+    <string name="text_decrease">-</string>
+    <string name="count_0">0</string>
+    <string name="count_1">1</string>
+    <string name="count_2">2</string>
+    <string name="toast">Toast</string>
+    <string name="total_estimation">The total estimate for all products is $ 204.21</string>
+    <string name="key">productId</string>
+    <string name="key_empty"></string>
 </resources>
